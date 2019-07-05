@@ -1,0 +1,48 @@
+(x, y): (4, 7)
+iteration:  0
+diff_time:  1
+rep_cycle:  1
+(x, y): (3, 4)
+iteration:  1
+diff_time:  1
+rep_cycle:  2
+(x, y): (1, 3)
+iteration:  2
+diff_time:  3
+rep_cycle:  5
+(x, y): (0, 1)
+iteration:  3
+sol:  4
+(x, y): (2, 4)
+iteration:  0
+diff_time:  2
+rep_cycle:  2
+(x, y): (0, 2)
+iteration:  1
+sol:  impossible
+(x, y): (2, 1)
+iteration:  0
+diff_time:  2
+rep_cycle:  2
+(x, y): (0, 1)
+iteration:  1
+sol:  1
+(x, y): (100000000000000000000000000000000000000000000000000, 50000000000000000000000000000000000000000000000001)
+iteration:  0
+diff_time:  1
+rep_cycle:  1
+(x, y): (49999999999999999999999999999999999999999999999999, 50000000000000000000000000000000000000000000000001)
+iteration:  1
+diff_time:  1
+rep_cycle:  2
+(x, y): (2, 49999999999999999999999999999999999999999999999999)
+iteration:  2
+diff_time:  24999999999999999999999999999999999999999999999999
+rep_cycle:  25000000000000000000000000000000000000000000000001
+(x, y): (1, 2)
+iteration:  3
+diff_time:  2
+rep_cycle:  25000000000000000000000000000000000000000000000003
+(x, y): (0, 1)
+iteration:  4
+sol:  25000000000000000000000000000000000000000000000002
