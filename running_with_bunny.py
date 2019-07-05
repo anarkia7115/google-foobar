@@ -3,6 +3,23 @@ INF = 9999  # time_limit < 999
 
 def solution(times, time_limit):
     """
+    0. check no loop
+    1. compute D, using Floyd-Warshall
+    2. find one `simple path` from start to one bunny, 
+      check if the time_left can be consumed for going to bulkhead.
+      We should stop current rescue if time_to_bulkhead is not enough. 
+    3. return all rescue plan
+
+    Details:
+      a) We should have 2 lists for every plan to record:
+        1) bunny_to_rescue
+        2) rescued_bunny
+    """
+    pass
+
+
+def solution_for_only_one_bunny_in_arm(times, time_limit):
+    """
     1. shortest paths: only 3 types off sp-tree should be computed (bellman-ford)
       a) start -> bunnies
       b) bunnies -> bulkhead
@@ -67,7 +84,8 @@ def solution(times, time_limit):
 
     rescued_numbers = [len(bunnies) for bunnies in rescued_bunny_ids_options]
     max_idx = rescued_numbers.index(max(rescued_numbers))
-    return rescued_numbers[max_idx]
+    print("all options: " + ", ".join(["-".join([str(xxx) for xxx in xx]) for xx in rescued_bunny_ids_options]))
+    return rescued_bunny_ids_options[max_idx]
 
     # c) repeat `b` until exceed time_limit, save optimized bunny number as opt_bunny_number[bunny_x]
     # d) repeat `a,b,c`, then choose best bunny number from opt_bunny_number
@@ -198,6 +216,25 @@ class Vertice(object):
         return path
 
 
+def floyd_warshall(W):
+    n = len(W)
+    D = [None] * n
+    D[0] = W
+    for k in range(1, n):
+        D[k] = new_mat(n)
+        for i in range(n):
+            for j in range(n):
+                D[k][i][j] = min(
+                        D[k-1][i][j], 
+                        D[k-1][i][k] + 
+                        D[k-1][k][j])
+    return D[n-1]
+
+
+def new_mat(n):
+    return [[0 for j in range(n)] for i in range(n)]
+
+
 def bellman_ford(G, w, s):
     # init has done naturally
     init_single_source(G, s)
@@ -258,6 +295,7 @@ def invert_mat(l):
 
 def get_sample_mat():
     return [[0, 2, 2, 2, -1], [9, 0, 2, 2, -1], [9, 3, 0, 2, -1], [9, 3, 2, 0, -1], [9, 3, 2, 2, 0]]
+    #return [[0, 1, 1, 1, 1], [1, 0, 1, 1, 1], [1, 1, 0, 1, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 0]]
 
 
 def init_env():
@@ -277,5 +315,9 @@ def init_env():
     return G, w, inv_w
 
 def main():
-    result = solution([[0, 2, 2, 2, -1], [9, 0, 2, 2, -1], [9, 3, 0, 2, -1], [9, 3, 2, 0, -1], [9, 3, 2, 2, 0]], 1)
+    #result = solution([[0, 2, 2, 2, -1], [9, 0, 2, 2, -1], [9, 3, 0, 2, -1], [9, 3, 2, 0, -1], [9, 3, 2, 2, 0]], 1)
+    result = solution([[0, 1, 1, 1, 1], [1, 0, 1, 1, 1], [1, 1, 0, 1, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 0]], 3)
     print("result: {}".format(result))
+
+if __name__ == "__main__":
+    main()
